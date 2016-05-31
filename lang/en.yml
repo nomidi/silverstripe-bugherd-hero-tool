@@ -1,0 +1,7 @@
+en:
+  BugherdHeroToolTest:
+    FindInTemplate: 'Find Bugherd implementation in Template. '
+    CantFindInTemplate: 'Cant find Bugherd implementation in Template. '
+    ModeTestedMode: 'Modus: %s – testet Mode: %s '
+    ModeTestedModeMember: 'LoginStatus: %s'
+    FindInTemplateMember: 'User is not logged in, but member_status is required'
