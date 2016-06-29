@@ -7,4 +7,5 @@ checks:
     phpunit_assertions: true
 
 filter:
-  paths: [code/*, tests/*]
+  paths: [code/*]
+  excluded_paths: [tests/*]
