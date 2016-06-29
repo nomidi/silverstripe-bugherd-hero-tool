@@ -1,6 +1,6 @@
-# For more information about the properties used in this file,
-# please see the EditorConfig documentation:
-# http://editorconfig.org
+# This file was created with help from editorconfig.org.
+# EditorConfig is awesome: http://EditorConfig.org
+#
 
 [*]
 charset = utf-8
