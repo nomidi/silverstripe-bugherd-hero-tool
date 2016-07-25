@@ -17,6 +17,9 @@ project.
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nomidi/silverstripe-bugherd-hero-tool/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/nomidi/silverstripe-bugherd-hero-tool/?branch=master)
 Namespacing is right now not recommended by Silverstripe
 
+## Travis Status
+[![Build Status](https://travis-ci.org/nomidi/silverstripe-bugherd-hero-tool.svg?branch=master)](https://travis-ci.org/nomidi/silverstripe-bugherd-hero-tool)
+
 ## Usage
 
 Add
