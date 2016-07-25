@@ -14,8 +14,9 @@ environment type it will be active. Possible values are **dev**,**test** and
 **dev** environment.
 Via the parameter member_status it is possible to configure the module if it
 will be visible for every site visitor or if this will just appear for logged
-in user. Possibile values are **false** (which means for every user) and
-**true** which will show bugherd interface just to signed in user.
+in user. Possible values are **false** (which means for every user) and
+**true** which will show the Bugherd interface just to signed in user. A destinction
+of different signed in user (like admin and editors) is right now not planned.
 
 ## Installation
 __Composer (recommended):__
