@@ -1,0 +1,3 @@
+mappings:
+  BugherdHeroTool: Nomidi\BugherdHeroTool\BugherdHeroTool
+  BugherdHeroToolTest: Nomidi\BugherdHeroToolTest\BugherdHeroToolTest

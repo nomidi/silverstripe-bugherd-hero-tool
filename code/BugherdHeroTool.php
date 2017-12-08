@@ -1,4 +1,15 @@
 <?php
+
+namespace Nomidi\BugherdHeroTool;
+
+use SilverStripe\Dev\Debug;
+use SilverStripe\Core\Config\Config;
+use Nomidi\BugherdHeroTool\BugherdHeroTool;
+use SilverStripe\Control\Director;
+use SilverStripe\Security\Member;
+use SilverStripe\View\Requirements;
+use SilverStripe\Core\Extension;
+
 class BugherdHeroTool extends Extension
 {
     /**
@@ -6,7 +17,7 @@ class BugherdHeroTool extends Extension
      */
     public function getProjectKey()
     {
-        $return =  Config::inst()->get('BugherdHeroTool', 'project_key');
+        $return =  Config::inst()->get(BugherdHeroTool::class, 'project_key');
         if ($return == '') {
             $return =  false;
         }
@@ -15,7 +26,7 @@ class BugherdHeroTool extends Extension
 
     public function getEnvType()
     {
-        $return = Config::inst()->get('BugherdHeroTool', 'environment_type');
+        $return = Config::inst()->get(BugherdHeroTool::class, 'environment_type');
 
         if ($return == '') {
             $return =  'dev';
@@ -25,7 +36,7 @@ class BugherdHeroTool extends Extension
 
     public function getMemberStatus()
     {
-        $return = Config::inst()->get('BugherdHeroTool', 'member_status');
+        $return = Config::inst()->get(BugherdHeroTool::class, 'member_status');
         if ($return == '') {
             $return = false;
         }
@@ -42,11 +53,12 @@ class BugherdHeroTool extends Extension
         $project_key = $this->getProjectKey();
         $env_type = $this->getEnvType();
         $member_status = $this->getMemberStatus();
-      
+        debug::show('test');
         if ($project_key) {
-            if ($env_type == Config::inst()->get('Director', 'environment_type')) {
+            debug::show(Director::get_environment_type());
+            if ($env_type == Director::get_environment_type()) {
                 if (($member_status && Member::currentUserID() != 0) || !$member_status) {
-                    Requirements::customScript($this->owner->renderWith('BugherdHeroTool'), 'BugherdHeroTool');
+                    Requirements::customScript($this->owner->renderWith('BugherdHeroTool'));
                 }
             }
         }

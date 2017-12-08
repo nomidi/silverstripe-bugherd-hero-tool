@@ -1,4 +1,16 @@
 <?php
+
+namespace Nomidi\BugherdHeroToolTest;
+
+
+
+use SilverStripe\Core\Config\Config;
+use Nomidi\BugherdHeroTool\BugherdHeroTool;
+use SilverStripe\Control\Director;
+use SilverStripe\Security\Member;
+use SilverStripe\Dev\FunctionalTest;
+
+
 class BugherdHeroToolTest extends FunctionalTest
 {
     protected static $fixture_file = 'SiteTreeTest.yml';
@@ -9,8 +21,8 @@ class BugherdHeroToolTest extends FunctionalTest
      */
     public function testProjectKey()
     {
-        Config::inst()->update('BugherdHeroTool', 'project_key', 'xxxx');
-        $project_key = Config::inst()->get('BugherdHeroTool', 'project_key');
+        Config::inst()->update(BugherdHeroTool::class, 'project_key', 'xxxx');
+        $project_key = Config::inst()->get(BugherdHeroTool::class, 'project_key');
         $this->assertTrue(is_string($project_key), "Can't find your Bugherd project_key, please insert the key into your _config.yml");
     }
 
@@ -18,16 +30,16 @@ class BugherdHeroToolTest extends FunctionalTest
 
     public function testMemberStatus()
     {
-        Config::inst()->update('BugherdHeroTool', 'member_status', true);
-        Config::inst()->update('Director', 'environment_type', 'dev');
-        Config::inst()->update('BugherdHeroTool', 'environment_type', 'dev');
-        Config::inst()->update('BugherdHeroTool', 'project_key', 'xxxx');
+        Config::inst()->update(BugherdHeroTool::class, 'member_status', true);
+        Config::inst()->update(Director::class, 'environment_type', 'dev');
+        Config::inst()->update(BugherdHeroTool::class, 'environment_type', 'dev');
+        Config::inst()->update(BugherdHeroTool::class, 'project_key', 'xxxx');
 
         $response = $this->get($this->objFromFixture('Page', 'home')->Link());
         $body = strpos($response->getBody(), $this->bugherd_string);
         $this->assertFalse($body, _t('BugherdHeroToolTest.FindInTemplate').vsprintf(_t('BugherdHeroToolTest.ModeTestedModeMember'), array('loggedOut')));
 
-        $cmseditor = $this->objFromFixture('Member', 'cmseditor');
+        $cmseditor = $this->objFromFixture(Member::class, 'cmseditor');
         $cmseditor->logIn();
         $response = $this->get($this->objFromFixture('Page', 'home')->Link());
         $body = strpos($response->getBody(), $this->bugherd_string);
@@ -39,20 +51,20 @@ class BugherdHeroToolTest extends FunctionalTest
      */
     public function testModusDevNoMember()
     {
-        Config::inst()->update('BugherdHeroTool', 'environment_type', 'dev');
-        Config::inst()->update('Director', 'environment_type', 'dev');
-        Config::inst()->update('BugherdHeroTool', 'project_key', 'xxxx');
+        Config::inst()->update(BugherdHeroTool::class, 'environment_type', 'dev');
+        Config::inst()->update(Director::class, 'environment_type', 'dev');
+        Config::inst()->update(BugherdHeroTool::class, 'project_key', 'xxxx');
 
         $response = $this->get($this->objFromFixture('Page', 'home')->Link());
         $body = strpos($response->getBody(), $this->bugherd_string);
         $this->assertTrue(is_numeric($body), _t('BugherdHeroToolTest.CantFindInTemplate').vsprintf(_t('BugherdHeroToolTest.ModeTestedMode'), array('dev', 'dev')));
 
-        Config::inst()->update('Director', 'environment_type', 'test');
+        Config::inst()->update(Director::class, 'environment_type', 'test');
         $response = $this->get($this->objFromFixture('Page', 'home')->Link());
         $body = strpos($response->getBody(), $this->bugherd_string);
         $this->assertFalse($body, _t('BugherdHeroToolTest.FindInTemplate').vsprintf(_t('BugherdHeroToolTest.ModeTestedMode'), array('dev', 'test')));
 
-        Config::inst()->update('Director', 'environment_type', 'live');
+        Config::inst()->update(Director::class, 'environment_type', 'live');
         $response = $this->get($this->objFromFixture('Page', 'home')->Link());
         $body = strpos($response->getBody(), $this->bugherd_string);
         $this->assertFalse($body, _t('BugherdHeroToolTest.FindInTemplate').vsprintf(_t('BugherdHeroToolTest.ModeTestedMode'), array('dev', 'live')));
@@ -60,20 +72,20 @@ class BugherdHeroToolTest extends FunctionalTest
 
     public function testModusTestNoMember()
     {
-        Config::inst()->update('BugherdHeroTool', 'environment_type', 'test');
-        Config::inst()->update('Director', 'environment_type', 'test');
-        Config::inst()->update('BugherdHeroTool', 'project_key', 'xxxx');
+        Config::inst()->update(BugherdHeroTool::class, 'environment_type', 'test');
+        Config::inst()->update(Director::class, 'environment_type', 'test');
+        Config::inst()->update(BugherdHeroTool::class, 'project_key', 'xxxx');
 
         $response = $this->get($this->objFromFixture('Page', 'home')->Link());
         $body = strpos($response->getBody(), $this->bugherd_string);
         $this->assertTrue(is_numeric($body), _t('BugherdHeroToolTest.CantFindInTemplate').vsprintf(_t('BugherdHeroToolTest.ModeTestedMode'), array('test', 'test')));
 
-        Config::inst()->update('Director', 'environment_type', 'dev');
+        Config::inst()->update(Director::class, 'environment_type', 'dev');
         $response = $this->get($this->objFromFixture('Page', 'home')->Link());
         $body = strpos($response->getBody(), $this->bugherd_string);
         $this->assertFalse($body, _t('BugherdHeroToolTest.FindInTemplate').vsprintf(_t('BugherdHeroToolTest.ModeTestedMode'), array('test', 'dev')));
 
-        Config::inst()->update('Director', 'environment_type', 'live');
+        Config::inst()->update(Director::class, 'environment_type', 'live');
         $response = $this->get($this->objFromFixture('Page', 'home')->Link());
         $body = strpos($response->getBody(), $this->bugherd_string);
         $this->assertFalse($body, _t('BugherdHeroToolTest.FindInTemplate').vsprintf(_t('BugherdHeroToolTest.ModeTestedMode'), array('test', 'live')));
@@ -81,20 +93,20 @@ class BugherdHeroToolTest extends FunctionalTest
 
     public function testModusLiveNoMember()
     {
-        Config::inst()->update('BugherdHeroTool', 'environment_type', 'live');
-        Config::inst()->update('Director', 'environment_type', 'live');
-        Config::inst()->update('BugherdHeroTool', 'project_key', 'xxxx');
+        Config::inst()->update(BugherdHeroTool::class, 'environment_type', 'live');
+        Config::inst()->update(Director::class, 'environment_type', 'live');
+        Config::inst()->update(BugherdHeroTool::class, 'project_key', 'xxxx');
 
         $response = $this->get($this->objFromFixture('Page', 'home')->Link());
         $body = strpos($response->getBody(), $this->bugherd_string);
         $this->assertTrue(is_numeric($body), _t('BugherdHeroToolTest.CantFindInTemplate').vsprintf(_t('BugherdHeroToolTest.ModeTestedMode'), array('live', 'live')));
 
-        Config::inst()->update('Director', 'environment_type', 'dev');
+        Config::inst()->update(Director::class, 'environment_type', 'dev');
         $response = $this->get($this->objFromFixture('Page', 'home')->Link());
         $body = strpos($response->getBody(), $this->bugherd_string);
         $this->assertFalse($body, _t('BugherdHeroToolTest.FindInTemplate').vsprintf(_t('BugherdHeroToolTest.ModeTestedMode'), array('live', 'dev')));
 
-        Config::inst()->update('Director', 'environment_type', 'test');
+        Config::inst()->update(Director::class, 'environment_type', 'test');
         $response = $this->get($this->objFromFixture('Page', 'home')->Link());
         $body = strpos($response->getBody(), $this->bugherd_string);
         $this->assertFalse($body, _t('BugherdHeroToolTest.FindInTemplate').vsprintf(_t('BugherdHeroToolTest.ModeTestedMode'), array('live', 'test')));
