@@ -1,6 +1,6 @@
 <?php
 
-namespace Nomidi\BugherdHeroTool\Tests;
+namespace Nomidi\BugherdHeroTool;
 
 use SilverStripe\Core\Config\Config;
 use Nomidi\BugherdHeroTool\BugherdHeroTool;
@@ -13,18 +13,18 @@ class BugherdHeroToolTest extends FunctionalTest
     protected static $fixture_file = 'SiteTreeTest.yml';
     public static $use_draft_site = true;
     private $bugherd_string = 'sidebarv2.js?apikey=';
+    protected static $bugherdname = 'Nomidi\BugherdHeroTool\BugherdHeroTool';
     /**
      * Test checks if an bugherd key was entered
      */
     public function testProjectKey()
     {
-        Config::inst()->update(BugherdHeroTool::class, 'project_key', 'xxxx');
+        Config::inst()->update($bugherdname, 'project_key', 'xxxx');
         $project_key = Config::inst()->get(BugherdHeroTool::class, 'project_key');
         $this->assertTrue(is_string($project_key), "Can't find your Bugherd project_key, please insert the key into your _config.yml");
     }
 
-
-
+/*
     public function testMemberStatus()
     {
         Config::inst()->update(BugherdHeroTool::class, 'member_status', true);
@@ -46,6 +46,7 @@ class BugherdHeroToolTest extends FunctionalTest
     /**
      * Test checks if the bugherd template can be found in the template implementation
      */
+    /*
     public function testModusDevNoMember()
     {
         Config::inst()->update(BugherdHeroTool::class, 'environment_type', 'dev');
@@ -108,4 +109,5 @@ class BugherdHeroToolTest extends FunctionalTest
         $body = strpos($response->getBody(), $this->bugherd_string);
         $this->assertFalse($body, _t('BugherdHeroToolTest.FindInTemplate').vsprintf(_t('BugherdHeroToolTest.ModeTestedMode'), array('live', 'test')));
     }
+    */
 }
