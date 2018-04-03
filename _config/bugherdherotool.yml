@@ -3,4 +3,4 @@ Name: 'bugherdherotools'
 ---
 SilverStripe\CMS\Controllers\ContentController:
   extensions:
-    - Nomidi\BugherdHeroTool\BugherdHeroTool
+    - Nomidi\BugherdHeroTool

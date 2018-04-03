@@ -1,9 +1,9 @@
 <?php
 
-namespace Nomidi\BugherdHeroTool;
+namespace Nomidi\BugherdHeroToolTest;
 
 use SilverStripe\Core\Config\Config;
-use Nomidi\BugherdHeroTool\BugherdHeroTool;
+use Nomidi\BugherdHeroTool;
 use SilverStripe\Control\Director;
 use SilverStripe\Security\Member;
 use SilverStripe\Dev\FunctionalTest;
@@ -13,14 +13,14 @@ class BugherdHeroToolTest extends FunctionalTest
     protected static $fixture_file = 'SiteTreeTest.yml';
     public static $use_draft_site = true;
     private $bugherd_string = 'sidebarv2.js?apikey=';
-    protected static $bugherdname = 'Nomidi\BugherdHeroTool\BugherdHeroTool';
+    protected static $bugherdname = 'Nomidi\BugherdHeroTool';
     /**
      * Test checks if an bugherd key was entered
      */
     public function testProjectKey()
     {
         Config::inst()->update($bugherdname, 'project_key', 'xxxx');
-        $project_key = Config::inst()->get(BugherdHeroTool::class, 'project_key');
+        $project_key = Config::inst()->get($bugherdname, 'project_key');
         $this->assertTrue(is_string($project_key), "Can't find your Bugherd project_key, please insert the key into your _config.yml");
     }
 

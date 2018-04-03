@@ -1,10 +1,9 @@
 <?php
 
-namespace Nomidi\BugherdHeroTool;
+namespace Nomidi;
 
 use SilverStripe\Dev\Debug;
 use SilverStripe\Core\Config\Config;
-use Nomidi\BugherdHeroTool\BugherdHeroTool;
 use SilverStripe\Control\Director;
 use SilverStripe\Security\Member;
 use SilverStripe\View\Requirements;
@@ -17,6 +16,7 @@ class BugherdHeroTool extends Extension
      */
     public function getProjectKey()
     {
+        debug::show(__CLASS__);
         $return =  Config::inst()->get(__CLASS__, 'project_key');
         debug::show($return);
         if ($return == '') {
