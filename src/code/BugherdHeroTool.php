@@ -17,7 +17,9 @@ class BugherdHeroTool extends Extension
      */
     public function getProjectKey()
     {
-        $return =  Config::inst()->get(BugherdHeroTool::class, 'project_key');
+        $return =  Config::inst()->get(__CLASS__, 'project_key');
+        debug::show(__CLASS__);
+        debug::show($return);
         if ($return == '') {
             $return =  false;
         }
@@ -26,7 +28,7 @@ class BugherdHeroTool extends Extension
 
     public function getEnvType()
     {
-        $return = Config::inst()->get(BugherdHeroTool::class, 'environment_type');
+        $return = Config::inst()->get(Nomidi\BugherdHeroTool::class, 'environment_type');
 
         if ($return == '') {
             $return =  'dev';
@@ -36,7 +38,7 @@ class BugherdHeroTool extends Extension
 
     public function getMemberStatus()
     {
-        $return = Config::inst()->get(BugherdHeroTool::class, 'member_status');
+        $return = Config::inst()->get(Nomidi\BugherdHeroTool::class, 'member_status');
         if ($return == '') {
             $return = false;
         }

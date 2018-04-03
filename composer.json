@@ -1,12 +1,12 @@
 {
     "name": "nomidi/silverstripe-bugherd-hero-tool",
+    "type": "silverstripe-vendormodule",
     "description": "Bugherd.com implementation for Silverstripe",
     "keywords": [
         "silverstripe",
         "bugherd"
     ],
-    "version": "1.0.0",
-    "type": "silverstripe-module",
+    "version": "2.0.0",
     "authors": [{
         "name": "Bastian Fritsch",
         "email": "mail@bastian-fritsch.de",
@@ -32,7 +32,13 @@
         "silverstripe/cms": "~3.1"
     },
     "require-dev": {
-		    "phpunit/PHPUnit": "~3.7@stable"
-	  }
+		    "phpunit/PHPUnit": "^5.7"
+	  },
+    "autoload":{
+      "psr-4": {
+        "Nomidi\\BugherdHeroTool\\":"src/",
+        "Nomidi\\ButherdHeroTool\\Tests\\":"tests/"
+      }
+    }
 
 }
