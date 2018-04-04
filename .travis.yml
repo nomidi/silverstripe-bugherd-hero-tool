@@ -8,7 +8,7 @@ env:
 before_script:
   - composer self-update || true
   - composer validate
-  - composer require --no-update silverstripe/installer:4.1.x; fi
+  - composer require --no-update silverstripe/installer:4.1.x
   - phpenv rehash
   - phpenv config-rm xdebug.ini || true
 
