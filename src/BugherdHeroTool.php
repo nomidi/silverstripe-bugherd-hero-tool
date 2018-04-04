@@ -16,9 +16,7 @@ class BugherdHeroTool extends Extension
      */
     public function getProjectKey()
     {
-        debug::show(__CLASS__);
         $return =  Config::inst()->get(__CLASS__, 'project_key');
-        debug::show($return);
         if ($return == '') {
             $return =  false;
         }
@@ -56,10 +54,9 @@ class BugherdHeroTool extends Extension
         $member_status = $this->getMemberStatus();
 
         if ($project_key) {
-            debug::show(Director::get_environment_type());
             if ($env_type == Director::get_environment_type()) {
                 if (($member_status && Member::currentUserID() != 0) || !$member_status) {
-                    Requirements::customScript($this->owner->renderWith('BugherdHeroTool'));
+                    Requirements::customScript($this->owner->renderWith('Nomidi/BugherdHeroTool/BugherdHeroTool'));
                 }
             }
         }
