@@ -19,10 +19,6 @@
         "homepage": "http://www.bastian-fritsch.de/",
         "role": "Developer"
     }],
-    "extra": {
-      "installer-name": "bugherd-hero-tool",
-      "expose": [ "client"]
-    },
     "support": {
     "issues": "https://github.com/nomidi/silverstripe-bugherd-hero-tool/issues"
     },

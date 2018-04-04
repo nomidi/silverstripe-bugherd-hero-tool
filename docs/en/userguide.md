@@ -1,7 +1,7 @@
 Add
 
 ```
-BugherdHeroTool:
+Nomidi\BugherdHeroTool:
   project_key: 'xxx'
   environment_type: 'dev'
   member_status: false

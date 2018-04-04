@@ -25,12 +25,12 @@ Namespacing is right now not recommended by Silverstripe
 Add
 
 ```
-BugherdHeroTool:
+Nomidi\BugherdHeroTool:
   project_key: 'xxx'
   environment_type: 'dev'
   member_status: false
 ```
-to your config.yml then replace 'xxx' with your bugherd.com project ID. Please
+to your mysite.yml then replace 'xxx' with your bugherd.com project ID. Please
 ensure to enter your project key with enclosing quotation marks.
 The other parameter (environment_type and member_status) are optional. For
 further information please stick to the documentation.
